@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 import gsap from "gsap";
-
+// import { Pane } from "tweakpane";
 
 /**Dbug */
 
@@ -17,6 +17,9 @@ function spin() {
 
   };
 
+  // const pane = new Tweakpane.Pane()
+
+  // const pane = new Pane();
 
 //object param
 
@@ -49,6 +52,16 @@ window.addEventListener('keydown', (event) => {
   }
 }
 )
+
+// const PARAMS = {
+//   factor: 0.1,
+//   speed: 0.01,
+//   size: 0.1,
+//   color: 0xffffff,
+// }
+
+// pane.addInput(PARAMS, 'color', { type: 'color' });
+
 
 
 //update the scene

@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = {
     //script path
-    entry: path.resolve(__dirname, '../src/cameras.js'),
+    entry: path.resolve(__dirname, '../src/textures.js'),
     output:
     {
         hashFunction: 'xxhash64',
