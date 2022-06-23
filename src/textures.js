@@ -25,12 +25,22 @@ loadingManager.onError = () => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager)
 const colorTexture = textureLoader.load("/textures/door/color.jpg" );
+const minecraftTexture = textureLoader.load("/textures/minecraft.png" );
+const checkerboardTexture = textureLoader.load("/textures/checkerboard-1024x1024.png" );
+const checkerboardSmallTexture = textureLoader.load("/textures/checkerboard-8x8.png" );
 const alphaTexture = textureLoader.load("/textures/door/alpha.jpg" );
 const heightTexture = textureLoader.load("/textures/door/height.jpg" );
 const normalTexture = textureLoader.load("/textures/door/normal.jpg" );
 const metalnessTexture = textureLoader.load("/textures/door/metalness.jpg" );
 const roughnessTexture = textureLoader.load("/textures/door/roughness.jpg" );
 const ambientOcclusionTexture = textureLoader.load("/textures/door/ambientOcclusion.jpg" );
+
+colorTexture.minFilter = THREE.LinearFilter
+checkerboardSmallTexture.magFilter = THREE.NearestFilter
+
+//nearest (mag) filter is better for performance  and fps
+minecraftTexture.magFilter = THREE.NearestFilter
+minecraftTexture.generateMipmaps = false
 
 //repeat is a vector2 that defines the number of times the texture is repeated across the surface.
 
@@ -50,9 +60,9 @@ const ambientOcclusionTexture = textureLoader.load("/textures/door/ambientOcclus
 
 ///rotation 
 
-colorTexture.rotation = Math.PI / 4
-colorTexture.center.x = 0.5
-colorTexture.center.y = 0.5
+// colorTexture.rotation = Math.PI / 4
+// colorTexture.center.x = 0.5
+// colorTexture.center.y = 0.5
 
 
 
@@ -90,8 +100,8 @@ const scene = new THREE.Scene()
 
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 console.log(geometry.attributes.uv)
-
-const material = new THREE.MeshBasicMaterial({ map: colorTexture })
+ 
+const material = new THREE.MeshBasicMaterial({ map: minecraftTexture});
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
