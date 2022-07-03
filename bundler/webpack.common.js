@@ -5,20 +5,18 @@ const path = require('path')
 
 module.exports = {
     //script path
-    entry: path.resolve(__dirname, '../src/materials.js'),
-    output:
-    {
+    entry: path.resolve(__dirname, '../src/lights.js'),
+    output: {
         hashFunction: 'xxhash64',
         filename: 'bundle.[contenthash].js',
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
-    plugins:
-    [
+    plugins: [
         new CopyWebpackPlugin({
-            patterns: [
-                { from: path.resolve(__dirname, '../static') }
-            ]
+            patterns: [{
+                from: path.resolve(__dirname, '../static')
+            }]
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
@@ -26,15 +24,12 @@ module.exports = {
         }),
         new MiniCSSExtractPlugin()
     ],
-    module:
-    {
-        rules:
-        [
+    module: {
+        rules: [
             // HTML
             {
                 test: /\.(html)$/,
-                use:
-                [
+                use: [
                     'html-loader'
                 ]
             },
@@ -43,8 +38,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use:
-                [
+                use: [
                     'babel-loader'
                 ]
             },
@@ -52,8 +46,7 @@ module.exports = {
             // CSS
             {
                 test: /\.css$/,
-                use:
-                [
+                use: [
                     MiniCSSExtractPlugin.loader,
                     'css-loader'
                 ]
@@ -63,8 +56,7 @@ module.exports = {
             {
                 test: /\.(jpg|png|gif|svg)$/,
                 type: 'asset/resource',
-                generator:
-                {
+                generator: {
                     filename: 'assets/images/[hash][ext]'
                 }
             },
@@ -73,8 +65,7 @@ module.exports = {
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 type: 'asset/resource',
-                generator:
-                {
+                generator: {
                     filename: 'assets/fonts/[hash][ext]'
                 }
             }
