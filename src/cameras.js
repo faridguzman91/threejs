@@ -7,35 +7,35 @@ import gsap from "gsap";
 
 /**Dbug */
 
-const gui = new dat.GUI({closed : true, width: 500});
+const gui = new dat.GUI({ closed: true, width: 500 });
 // gui.hide();
 
 //spin function
 
 function spin() {
-  gsap.to(mesh.rotation, { y: mesh.rotation.y + 10 , duration: 1 });
+    gsap.to(mesh.rotation, { y: mesh.rotation.y + 10, duration: 1 });
 
-  };
+};
 
-  // const pane = new Tweakpane.Pane()
+// const pane = new Tweakpane.Pane()
 
-  // const pane = new Pane();
+// const pane = new Pane();
 
 //object param
 
 const parameters = {
-  color: 0xff0000,
-  intensity: 1,
-  spin: () => {
-    spin();
-    console.log("spin");
+    color: 0xff0000,
+    intensity: 1,
+    spin: () => {
+        spin();
+        console.log("spin");
 
-  }
+    }
 
 }
 
 gui.addColor(parameters, 'color').onChange(() => {
-  material.color.set(parameters.color);
+    material.color.set(parameters.color);
 })
 
 //spin
@@ -43,15 +43,14 @@ gui.addColor(parameters, 'color').onChange(() => {
 gui.add(parameters, 'spin')
 
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'h') {
-    console.log("h");
-    if(gui._hidden)
-    gui.show()
-    else
-    gui.hide()
-  }
-}
-)
+    if (event.key === 'h') {
+        console.log("h");
+        if (gui._hidden)
+            gui.show()
+        else
+            gui.hide()
+    }
+})
 
 // const PARAMS = {
 //   factor: 0.1,
@@ -62,13 +61,7 @@ window.addEventListener('keydown', (event) => {
 
 // pane.addInput(PARAMS, 'color', { type: 'color' });
 
-
-
 //update the scene
-
-
-
-
 //ADD CONTROLS
 /**
  * Base
@@ -78,60 +71,60 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Sizes
 const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+    width: window.innerWidth,
+    height: window.innerHeight,
 };
 
 window.addEventListener("resize", () => {
-  console.log("resized");
+    console.log("resized");
 
-  sizes.height = window.innerHeight;
-  sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+    sizes.width = window.innerWidth;
 
-  //update camera
+    //update camera
 
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
 
-  //update renderer
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  //pixel ratio is the limit of the device
+    //update renderer
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    //pixel ratio is the limit of the device
 });
 
 //listen to double click to change size
 
 window.addEventListener("dblclick", () => {
-  //  console.log('dblclick')
+    //  console.log('dblclick')
 
-  const fullscreenElement =
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.mozFullScreenElement ||
-    document.msFullscreenElement;
+    const fullscreenElement =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement;
 
-  if (!document.fullscreenElement) {
-    if (canvas.requestFullscreen) {
-      canvas.requestFullscreen();
-    } else if (canvas.webkitRequestFullscreen) {
-      canvas.webkitRequestFullscreen();
+    if (!document.fullscreenElement) {
+        if (canvas.requestFullscreen) {
+            canvas.requestFullscreen();
+        } else if (canvas.webkitRequestFullscreen) {
+            canvas.webkitRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
     }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
 });
 
 // Cursor
 const cursor = {
-  x: 0,
-  y: 0,
+    x: 0,
+    y: 0,
 };
 
 window.addEventListener("mousemove", (event) => {
-  cursor.x = event.clientX / sizes.width - 0.5;
-  cursor.y = -(event.clientY / sizes.height - 0.5);
+    cursor.x = event.clientX / sizes.width - 0.5;
+    cursor.y = -(event.clientY / sizes.height - 0.5);
 });
 
 // Scene
@@ -158,8 +151,8 @@ const geometry = new THREE.BufferGeometry();
 const count = 5000
 const positionArray = new Float32Array(count * 3 * 3);
 
-for (let i = 0; i < count * 3 *3 ; i++) {
-  positionArray[i] = (Math.random() - 0.5) * 4;
+for (let i = 0; i < count * 3 * 3; i++) {
+    positionArray[i] = (Math.random() - 0.5) * 4;
 
 }
 
@@ -186,8 +179,8 @@ geometry.setAttribute('position', positionAttribute);
 
 
 const material = new THREE.MeshBasicMaterial({
-  color: parameters.color,
-  wireframe: true,
+    color: parameters.color,
+    wireframe: true,
 })
 
 const mesh = new THREE.Mesh(geometry, material);
@@ -201,11 +194,11 @@ scene.add(mesh);
 //chaining
 
 gui
-.add(mesh.position, 'y', -3, 3, 0.01)
-.min(-3)
-.max(3)
-.step(0.01)
-.name('elevation')
+    .add(mesh.position, 'y', -3, 3, 0.01)
+    .min(-3)
+    .max(3)
+    .step(0.01)
+    .name('elevation')
 
 gui.add(mesh, 'visible')
 
@@ -215,10 +208,10 @@ gui.add(material, 'wireframe')
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
-  0.1,
-  100
+    75,
+    sizes.width / sizes.height,
+    0.1,
+    100
 );
 // const aspectRatio = sizes.width / sizes.height
 // const camera = new THREE.OrthographicCamera(- 1 * aspectRatio, 1 * aspectRatio, 1, - 1, 0.1, 100)
@@ -231,7 +224,7 @@ controls.enableDamping = true;
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-  canvas: canvas,
+    canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
 
@@ -239,16 +232,16 @@ renderer.setSize(sizes.width, sizes.height);
 const clock = new THREE.Clock();
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
+    const elapsedTime = clock.getElapsedTime();
 
-  // Update controls
-  controls.update();
+    // Update controls
+    controls.update();
 
-  // Render
-  renderer.render(scene, camera);
+    // Render
+    renderer.render(scene, camera);
 
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick);
 };
 
 tick();
