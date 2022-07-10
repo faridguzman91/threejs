@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = {
     //script path
-    entry: path.resolve(__dirname, '../src/materials.js'),
+    entry: path.resolve(__dirname, '../src/shadows.js'),
     output:
     {
         hashFunction: 'xxhash64',
