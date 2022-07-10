@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = {
     //script path
-    entry: path.resolve(__dirname, '../src/lights.js'),
+    entry: path.resolve(__dirname, '../src/shadows.js'),
     output: {
         hashFunction: 'xxhash64',
         filename: 'bundle.[contenthash].js',
